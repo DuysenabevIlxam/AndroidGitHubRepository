@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/powerFragment"
-        android:name="com.example.furniq.PowerFragment"
+        android:name="com.example.furniq.ui.power.TabFragment"
         android:label="fragment_power"
-        tools:layout="@layout/fragment_power" />
+        tools:layout="@layout/fragment_tab" />
     <fragment
         android:id="@+id/heartFragment"
         android:name="com.example.furniq.HeartFragment"

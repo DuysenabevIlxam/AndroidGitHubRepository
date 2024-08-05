@@ -2,10 +2,16 @@ package com.example.furniq.di
 
 import com.example.furniq.api.ApiService
 import com.example.furniq.repo.auth_repo.AuthRepo
+import com.example.furniq.repo.auth_repo.AllProductsRepository
+import com.example.furniq.repo.auth_repo.LatestRepository
+import com.example.furniq.repo.auth_repo.PopularRepository
 import com.example.furniq.settings.Settings
 import com.example.furniq.ui.auth.getProfil.ProfileVM
 import com.example.furniq.ui.auth.sign_in.SignInVM
 import com.example.furniq.ui.auth.sign_up.SignUpVM
+import com.example.furniq.ui.power.PowerVM
+import com.example.furniq.ui.power.latest.LatestVM
+import com.example.furniq.ui.power.popular.PopularVM
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -45,12 +51,18 @@ val networkModule = module {
 
 val repositoryModule = module {
     single { AuthRepo(get(), get()) }
+    single { AllProductsRepository(get()) }
+    single { PopularRepository(get()) }
+    single { LatestRepository(get()) }
 
 }
 val viewModule = module {
     viewModel { SignUpVM(get(),get()) }
     viewModel { ProfileVM(get()) }
     viewModel { SignInVM(get(),get()) }
+    viewModel { PowerVM(get()) }
+    viewModel { PopularVM(get()) }
+    viewModel { LatestVM(get()) }
 
 
 }

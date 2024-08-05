@@ -12,6 +12,7 @@ import com.example.furniq.R
 import com.example.furniq.data.sign_up_data.Data
 import com.example.furniq.databinding.FragmentProfilBinding
 import com.example.furniq.sealedClass.ProfileSealedClass
+import com.example.furniq.settings.Settings
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -24,8 +25,14 @@ class ProfileFragment : Fragment(R.layout.fragment_profil) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentProfilBinding.bind(view)
-        setUpObserver()
 
+        val  settings = Settings(requireContext())
+
+        if (settings.isUserLoggedIn()==false){
+            findNavController().navigate(R.id.action_profilFragment_to_registerFragment)
+        }else{
+            setUpObserver()
+        }
         binding?.btnShigiw?.setOnClickListener {
            // binding?.progresBarProfile?.visibility = View.INVISIBLE
             vm.logOut()
@@ -42,6 +49,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profil) {
                     is ProfileSealedClass.Success -> {
                         val pData = result.profileData.data
                         displayProfileData(pData)
+                        binding?.progressProfile?.visibility = View.INVISIBLE
                     }
                     is ProfileSealedClass.NetworkError -> {
                         showMessage(result.msg.toString())
@@ -50,7 +58,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profil) {
                         showMessage(result.message)
                     }
                     is ProfileSealedClass.Loading -> {
+
+                        binding?.progressProfile?.visibility = View.VISIBLE
                     }
+
                     else -> {}
                 }
             }

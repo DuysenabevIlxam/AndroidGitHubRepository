@@ -25,11 +25,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentRegisterBinding.bind(view)
 
-        val  settings = Settings(requireContext())
 
-        if (settings.isUserLoggedIn()){
-            findNavController().navigate(R.id.action_registerFragment_to_profilFragment)
-        }
 
 
 
@@ -67,6 +63,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
         lifecycleScope.launch {
             vm.signUpState.collect { result ->
+
                 when (result) {
                     is SealedClass.SuccessData<*> -> {
                          findNavController().navigate(R.id.action_registerFragment_to_profilFragment)
@@ -78,7 +75,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                         Log.d("QQQ", "NetworkError boldi->>: ")
                     }
                     is SealedClass.ErrorMessage<*> -> {
-                        Toast.makeText(requireContext(), result.error.toString(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Bul nomerden aldin kirilgen", Toast.LENGTH_SHORT).show()
                         Log.d("QQQ", "ErrorMessage Register boldi->>:${result.error.toString()} ")
                     }
                     is SealedClass.Loading -> {

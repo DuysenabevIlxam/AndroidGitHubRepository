@@ -3,6 +3,9 @@ package com.example.furniq.api
 import com.example.furniq.data.registerTokenData.RegisterTokenData
 import com.example.furniq.data.sign_in_data.LoginTokenData
 import com.example.furniq.data.sign_up_data.GetProfileData
+import com.example.furniq.data.get_all_products_data.ProductsData
+import com.example.furniq.data.latest_data.LatestData
+import com.example.furniq.data.popular_data.PopularData
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -24,5 +27,15 @@ interface ApiService {
     @FormUrlEncoded
     @POST("login")
     suspend fun signIn(@Field("phone") phone: String, @Field("password") password: String): Response<LoginTokenData>
+
+    @GET("products")
+    suspend fun getAllProducts(): Response<ProductsData>
+
+    @GET("popularProducts")
+    suspend fun getPopular() :Response<PopularData>
+
+    @GET("latestProducts")
+    suspend fun getLatest() :Response<LatestData>
+
 
 }
