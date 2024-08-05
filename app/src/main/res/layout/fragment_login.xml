@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".PersonFragment">
+    tools:context=".ui.auth.sign_in.LoginFragment">
 
 
     <androidx.cardview.widget.CardView
@@ -21,39 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/txt_ati"
-                android:text="Ati"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:textSize="24sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                >
-            </TextView>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/search1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                app:layout_constraintTop_toBottomOf="@id/txt_ati"
-                app:boxCornerRadiusBottomStart="12dp"
-                app:boxCornerRadiusTopEnd="12dp"
-                app:boxCornerRadiusBottomEnd="12dp"
-                app:boxCornerRadiusTopStart="12dp"
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="Ati Familyasi"
-                    >
-                </com.google.android.material.textfield.TextInputEditText>
-            </com.google.android.material.textfield.TextInputLayout>
-
 
             <TextView
                 android:id="@+id/txt_telefon"
@@ -61,10 +28,10 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/search1"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/search2"
                 app:layout_constraintStart_toStartOf="parent"
                 >
@@ -82,9 +49,13 @@
                 app:boxCornerRadiusTopStart="12dp"
                 >
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Telefon nomer"
+                    android:textSize="12dp"
+                    android:text="998"
+                    android:inputType="number"
                     >
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
@@ -96,7 +67,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/search2"
@@ -104,8 +75,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 >
             </TextView>
-
-
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/search3"
@@ -117,12 +86,16 @@
                 app:boxCornerRadiusTopEnd="12dp"
                 app:boxCornerRadiusBottomEnd="12dp"
                 app:boxCornerRadiusTopStart="12dp"
+                app:endIconMode="password_toggle"
                 >
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_parol"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:hint="Parol"
+                    android:hint="Keminde 6 belgi"
+                    android:textSize="12dp"
+
                     >
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
@@ -133,51 +106,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/search3"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginHorizontal="32dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginBottom="12dp"
                 app:cardCornerRadius="12dp"
-            >
+                >
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_registraciya"
+                    android:id="@+id/btn_login"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Регистрация"
+                    android:text="Login"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
-                    android:background="#E47351"
+                    android:background="#E57351"
+
                     >
                 </androidx.appcompat.widget.AppCompatButton>
             </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/txt_akk1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/card_btn"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/txt_akk2"
-                android:text="Если есть аккаунт?"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                />
-            <TextView
-                android:id="@+id/txt_akk2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/card_btn"
-                app:layout_constraintStart_toEndOf="@id/txt_akk1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:textColor="#052FC8"
-                android:text="Вайти"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

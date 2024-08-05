@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.power.AllProductsClickFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_mebel"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardCornerRadius="20dp">
+
+       <ImageView
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:src="@drawable/ic_star"
+           />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/name_mebel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/card_mebel"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Name"
+        android:textSize="32sp"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/black"
+        />
+
+    <ImageView
+        android:id="@+id/img_star_all_products_clicked"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_star"
+        app:layout_constraintTop_toBottomOf="@id/name_mebel"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp"
+        />
+
+    <TextView
+        android:id="@+id/star_count_all_products_clicked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/name_mebel"
+        app:layout_constraintStart_toEndOf="@id/img_star_all_products_clicked"
+        android:text="0"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        />
+
+    <TextView
+        android:id="@+id/comment_count_all_products_clicked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/name_mebel"
+        app:layout_constraintStart_toEndOf="@id/star_count_all_products_clicked"
+        android:text="0"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        />
+
+    <TextView
+        android:id="@+id/comment_text_all_products_clicked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/name_mebel"
+        app:layout_constraintStart_toEndOf="@id/comment_count_all_products_clicked"
+        android:text="comment"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        />
+
+    <TextView
+        android:id="@+id/text_prodavec_all_products_clicked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/name_mebel"
+        app:layout_constraintStart_toEndOf="@id/comment_text_all_products_clicked"
+        android:text="Продавец:"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        />
+
+    <TextView
+        android:id="@+id/name_prodavec_all_products_clicked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/name_mebel"
+        app:layout_constraintStart_toEndOf="@id/text_prodavec_all_products_clicked"
+        android:text="Toliq at"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        />
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name_mebel"
+        android:src="@drawable/heart_svgrepo_com"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        />
+
+    <TextView
+        android:id="@+id/text_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/img_star_all_products_clicked"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Цвет:"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/black"
+        />
+    <TextView
+        android:id="@+id/color_mebel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/img_star_all_products_clicked"
+        app:layout_constraintStart_toEndOf="@id/text_color"
+        android:text="Reni"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/text_material"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/text_color"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Материал:"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/material_mebel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/color_mebel"
+        app:layout_constraintStart_toEndOf="@id/text_material"
+        android:text="Materiali"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/text_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/text_material"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Количество :"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/black"
+        />
+
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/text_count"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_margin="16dp"
+               app:cardBackgroundColor="#D5D6D6"
+                app:cardElevation="100000000000dp"
+                app:cardCornerRadius="4dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+
+                    >
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:padding="8dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:padding="8dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:padding="8dp"
+                        />
+
+
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
