@@ -1,5 +1,6 @@
 package com.example.furniq.ui.auth.getProfil
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -36,6 +37,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profil) {
         binding?.btnShigiw?.setOnClickListener {
            // binding?.progresBarProfile?.visibility = View.INVISIBLE
             vm.logOut()
+            redirectToLogin()
 
           // findNavController().navigate(R.id.action_profilFragment_to_registerFragment)
             //(activity as? MainActivity)?.setNewLocale(settings.language)
@@ -77,6 +79,15 @@ class ProfileFragment : Fragment(R.layout.fragment_profil) {
 
     private fun showMessage(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun redirectToLogin() {
+        // Start MainActivity and clear the activity stack
+        val intent = Intent(requireContext(), MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        startActivity(intent)
+        requireActivity().finish()
     }
 
     override fun onDestroyView() {

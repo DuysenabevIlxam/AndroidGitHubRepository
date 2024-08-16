@@ -11,16 +11,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.furniq.R
 import com.example.furniq.adapters.LatestAdapter
 import com.example.furniq.adapters.PopularAdapter
+import com.example.furniq.data.latest_data.Data
 import com.example.furniq.data.latest_data.LatestData
 import com.example.furniq.databinding.FragmentLatestBinding
 import com.example.furniq.sealedClass.SealedClass
+import com.example.furniq.ui.power.all_products_clicked.LatestClickedFragment
+import com.example.furniq.ui.power.all_products_clicked.PopularClickedFragment
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class LatestFragment : Fragment(R.layout.fragment_latest) , LatestAdapter.OnItemClickListener{
 
-    private lateinit var latestAdapter: LatestAdapter
+    private  var latestAdapter= LatestAdapter(this)
     private lateinit var binding: FragmentLatestBinding
     private val vm: LatestVM by viewModel()
 
@@ -33,7 +36,6 @@ class LatestFragment : Fragment(R.layout.fragment_latest) , LatestAdapter.OnItem
         super.onViewCreated(view, savedInstanceState)
         vm.getLatest()
         // Initialize the adapter
-        latestAdapter = LatestAdapter()
 
         // Set up RecyclerView
         binding.recyclerViewLatest.layoutManager = LinearLayoutManager(requireContext())
@@ -84,10 +86,18 @@ class LatestFragment : Fragment(R.layout.fragment_latest) , LatestAdapter.OnItem
 
     }
 
-    override fun onItemClick(position: Int) {
-        // Handle item click
-        val clickedItem = latestAdapter.models[position]
-        // Do something with the clicked item
+
+    override fun onItemClick(position: Data) {
+        val fragment = LatestClickedFragment()
+        val bundle = Bundle()
+        bundle.putInt("productIdLatest",position.id)
+        fragment.arguments = bundle
+        Log.d("QQQ", "latestID:${position.id} ")
+
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
 }

@@ -99,7 +99,7 @@
         />
 
     <TextView
-        android:id="@+id/price_latest_latest"
+        android:id="@+id/price_latest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/img_star_latest"

@@ -12,17 +12,20 @@ import com.example.furniq.R
 import com.example.furniq.adapters.ItemAdapter
 import com.example.furniq.adapters.PopularAdapter
 import com.example.furniq.data.get_all_products_data.ProductsData
+import com.example.furniq.data.popular_data.Data
 import com.example.furniq.data.popular_data.PopularData
 import com.example.furniq.databinding.FragmentAllProductsBinding
 import com.example.furniq.databinding.FragmentPopularBinding
 import com.example.furniq.sealedClass.SealedClass
 import com.example.furniq.ui.power.PowerVM
+import com.example.furniq.ui.power.all_products_clicked.AllProductsClickFragment
+import com.example.furniq.ui.power.all_products_clicked.PopularClickedFragment
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PopularFragment : Fragment(R.layout.fragment_popular), PopularAdapter.OnItemClickListener  {
 
-    private lateinit var popularAdapter: PopularAdapter
+    private  val popularAdapter= PopularAdapter(this)
     private lateinit var binding: FragmentPopularBinding
     private val vm: PopularVM by viewModel()
 
@@ -35,7 +38,7 @@ class PopularFragment : Fragment(R.layout.fragment_popular), PopularAdapter.OnIt
         super.onViewCreated(view, savedInstanceState)
         vm.getPopular()
         // Initialize the adapter
-        popularAdapter = PopularAdapter()
+
 
         // Set up RecyclerView
         binding.recyclerViewPopular.layoutManager = LinearLayoutManager(requireContext())
@@ -75,6 +78,7 @@ class PopularFragment : Fragment(R.layout.fragment_popular), PopularAdapter.OnIt
                     is SealedClass.Loading -> {
                     // Show loading indicator
                      binding.progressPopular.visibility = View.VISIBLE
+                        Log.i("TTT", "qalay: ")
                     //binding.errorTextView.visibility = View.GONE
                 }
                     else -> {}
@@ -86,12 +90,18 @@ class PopularFragment : Fragment(R.layout.fragment_popular), PopularAdapter.OnIt
 
     }
 
-    override fun onItemClick(position: Int) {
-        // Handle item click
-        val clickedItem = popularAdapter.models[position]
-        // Do something with the clicked item
-    }
+    override fun onItemClick(position: Data) {
+        val fragment = PopularClickedFragment()
+        val bundle = Bundle()
+        bundle.putInt("productIdPopular",position.id)
+        fragment.arguments = bundle
 
+
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
 
 
 }
