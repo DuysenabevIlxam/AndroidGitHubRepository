@@ -3,16 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/powerFragment">
+    app:startDestination="@id/tabFragment">
 
     <fragment
-        android:id="@+id/powerFragment"
-        android:name="com.example.furniq.ui.power.TabFragment"
-        android:label="fragment_power"
-        tools:layout="@layout/fragment_tab" />
-    <fragment
         android:id="@+id/heartFragment"
-        android:name="com.example.furniq.HeartFragment"
+        android:name="com.example.furniq.ui.power.favourites.HeartFragment"
         android:label="fragment_heart"
         tools:layout="@layout/fragment_heart" />
     <fragment
@@ -30,9 +25,13 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.furniq.SearchFragment"
+        android:name="com.example.furniq.ui.search.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_categoriesByIdFragment"
+            app:destination="@id/categoriesByIdFragment" />
+    </fragment>
     <fragment
         android:id="@+id/shoppingCartFragment"
         android:name="com.example.furniq.ShoppingCartFragment"
@@ -45,7 +44,9 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment2_to_profilFragment"
-            app:destination="@id/profilFragment" />
+            app:destination="@id/profilFragment"
+            app:popUpTo="@id/profilFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/profilFragment"
@@ -54,6 +55,54 @@
         tools:layout="@layout/fragment_profil" >
         <action
             android:id="@+id/action_profilFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
+            app:destination="@id/registerFragment"
+            app:popUpTo="@id/profilFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
+    <fragment
+        android:id="@+id/allProductsClickFragment"
+        android:name="com.example.furniq.ui.power.all_products_clicked.AllProductsClickFragment"
+        android:label="fragment_all_products_click"
+        tools:layout="@layout/fragment_all_products_click" >
+
+        <action
+            android:id="@+id/action_allProductsClickFragment_to_tabFragment"
+            app:destination="@id/tabFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/latestFragment"
+        android:name="com.example.furniq.ui.power.latest.LatestFragment"
+        android:label="fragment_latest"
+        tools:layout="@layout/fragment_latest" />
+    <fragment
+        android:id="@+id/popularFragment"
+        android:name="com.example.furniq.ui.power.popular.PopularFragment"
+        android:label="fragment_popular"
+        tools:layout="@layout/fragment_popular" />
+    <fragment
+        android:id="@+id/allProductsFragment2"
+        android:name="com.example.furniq.ui.power.AllProductsFragment"
+        android:label="fragment_all_products"
+        tools:layout="@layout/fragment_all_products" >
+
+
+        <action
+            android:id="@+id/action_allProductsFragment2_to_allProductsClickFragment"
+            app:destination="@id/allProductsClickFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tabFragment"
+        android:name="com.example.furniq.ui.power.TabFragment"
+        android:label="fragment_tab"
+        tools:layout="@layout/fragment_tab" >
+
+        <action
+            android:id="@+id/action_tabFragment_to_allProductsClickFragment"
+            app:destination="@id/allProductsClickFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoriesByIdFragment"
+        android:name="com.example.furniq.ui.product_by_id_categories.CategoriesByIdFragment"
+        android:label="fragment_categories_by_id"
+        tools:layout="@layout/fragment_categories_by_id" />
 </navigation>

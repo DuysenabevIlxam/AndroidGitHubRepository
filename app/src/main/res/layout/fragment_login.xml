@@ -111,7 +111,6 @@
                 android:layout_marginBottom="12dp"
                 app:cardCornerRadius="12dp"
                 >
-
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_login"
                     android:layout_width="match_parent"
@@ -121,17 +120,11 @@
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:background="#E57351"
-
                     >
                 </androidx.appcompat.widget.AppCompatButton>
             </androidx.cardview.widget.CardView>
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
 
     </androidx.cardview.widget.CardView>
 

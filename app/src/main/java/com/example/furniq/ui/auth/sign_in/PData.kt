@@ -1,6 +1,10 @@
-package com.example.furniq.data.popular_data
+package com.example.furniq.ui.auth.sign_in
 
-data class Data(
+import com.example.furniq.data.get_all_products_data.Description
+import com.example.furniq.data.get_all_products_data.Image
+import com.example.furniq.data.get_all_products_data.Name
+
+data class PData(
     val category_id: Int,
     val description: Description,
     val discount_price: Any,
@@ -12,4 +16,4 @@ data class Data(
     val quantity: Int,
     val rating: Int,
     val reviews_count: Int
-)
+): Demo()
