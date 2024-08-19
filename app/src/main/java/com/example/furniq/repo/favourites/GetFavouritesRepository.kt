@@ -32,4 +32,46 @@ class GetFavouritesRepository (private val apiService: ApiService,private val se
         }
     }
 
+
+    fun postFavourites(productId : Int): Flow<SealedClass> = flow {
+        try {
+            val response = apiService.postFavourites("Bearer ${settings.token}",productId)
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    emit(SealedClass.SuccessData(it))
+                } ?: run {
+                    emit(SealedClass.ErrorMessage("Empty response"))
+                }
+            } else {
+                val errorBody = response.errorBody()?.string()
+                emit(SealedClass.ErrorMessage(errorBody ?: "Unknown error"))
+            }
+        } catch (e: IOException) {
+            emit(SealedClass.NetworkError("Network error"))
+        } catch (e: HttpException) {
+            emit(SealedClass.ErrorMessage(e.message ?: "HTTP error"))
+        }
+    }
+
+    fun deleteFavourites(productId :Int): Flow<SealedClass> = flow {
+        try {
+            val response = apiService.deleteFavourite("Bearer ${settings.token}",productId)
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    emit(SealedClass.SuccessData(it))
+                    Log.d("TTT", "repository:--->${response} ")
+                } ?: run {
+                    emit(SealedClass.ErrorMessage("Empty response"))
+                }
+            } else {
+                val errorBody = response.errorBody()?.string()
+                emit(SealedClass.ErrorMessage(errorBody ?: "Unknown error"))
+            }
+        } catch (e: IOException) {
+            emit(SealedClass.NetworkError("Network error"))
+        } catch (e: HttpException) {
+            emit(SealedClass.ErrorMessage(e.message ?: "HTTP error"))
+        }
+    }
+
 }

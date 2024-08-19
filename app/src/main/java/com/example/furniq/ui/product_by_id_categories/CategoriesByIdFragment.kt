@@ -11,13 +11,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.furniq.R
 import com.example.furniq.adapters.CategoryByIdAdapter
-import com.example.furniq.adapters.ItemAdapter
-import com.example.furniq.data.get_all_products_data.PData
+import com.example.furniq.ui.auth.sign_in.PData
 import com.example.furniq.data.get_all_products_data.ProductsData
-import com.example.furniq.databinding.FragmentAllProductsBinding
 import com.example.furniq.databinding.FragmentCategoriesByIdBinding
 import com.example.furniq.sealedClass.SealedClass
-import com.example.furniq.ui.power.PowerVM
 import com.example.furniq.ui.power.all_products_clicked.AllProductsClickFragment
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel

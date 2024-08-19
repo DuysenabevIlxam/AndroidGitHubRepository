@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,7 +24,7 @@
 
             <TextView
                 android:id="@+id/txt_ati"
-                android:text="Ati"
+                android:text="Ati Familya"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:textSize="18sp"
@@ -82,6 +83,7 @@
                 app:boxCornerRadiusTopEnd="12dp"
                 app:boxCornerRadiusBottomEnd="12dp"
                 app:boxCornerRadiusTopStart="12dp"
+                app:endIconMode="password_toggle"
                 >
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txt_phone"
@@ -160,41 +162,46 @@
                 </androidx.appcompat.widget.AppCompatButton>
             </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/txt_loginga_otiw"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/card_btn"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/txt_kiriw"
-                android:text="Eger akkauntiniz bolsa?"
-                android:textSize="12sp"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                />
-            <TextView
-                android:id="@+id/txt_kiriw"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/card_btn"
-                app:layout_constraintStart_toEndOf="@id/txt_loginga_otiw"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:textColor="#052FC8"
-                android:text="Kiriw"
-                android:textSize="12sp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:padding="16dp"
-                />
+                >
+                <TextView
+                    android:id="@+id/txt_loginga_otiw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/txt_kiriw"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text="Eger akkauntiniz bolsa?"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="8dp"
 
+                    />
+                <TextView
+                    android:id="@+id/txt_kiriw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/txt_loginga_otiw"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textColor="#052FC8"
+                    android:text="Kiriw"
+                    android:textSize="12sp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:padding="8dp"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
 
     </androidx.cardview.widget.CardView>
 

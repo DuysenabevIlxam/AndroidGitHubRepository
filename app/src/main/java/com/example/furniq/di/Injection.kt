@@ -60,8 +60,8 @@ val networkModule = module {
 val repositoryModule = module {
     single { AuthRepo(get(), get()) }
     single { AllProductsRepository(get(),get()) }
-    single { PopularRepository(get()) }
-    single { LatestRepository(get()) }
+    single { PopularRepository(get(),get()) }
+    single { LatestRepository(get(),get()) }
     single { ProductByIdRepository(get()) }
     single { CategoriesRepository(get()) }
     single { CategoryByIdRepository(get()) }

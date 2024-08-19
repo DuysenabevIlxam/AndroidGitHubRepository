@@ -1,4 +1,8 @@
-package com.example.furniq.data.favourites_data
+package com.example.furniq.ui.auth.sign_in
+
+import com.example.furniq.data.favourites_data.Description
+import com.example.furniq.data.favourites_data.Image
+import com.example.furniq.data.favourites_data.Name
 
 data class FData(
     val category_id: Int,
@@ -11,4 +15,4 @@ data class FData(
     val quantity: Int,
     val rating: Int,
     val reviews_count: Int
-)
+) :Demo()

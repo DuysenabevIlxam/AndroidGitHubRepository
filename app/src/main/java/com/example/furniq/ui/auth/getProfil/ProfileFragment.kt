@@ -35,7 +35,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profil) {
             setUpObserver()
         }
         binding?.btnShigiw?.setOnClickListener {
-           // binding?.progresBarProfile?.visibility = View.INVISIBLE
+           // binnding?.progresBarProfile?.visibility = View.INVISIBLE
             vm.logOut()
             redirectToLogin()
 

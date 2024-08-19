@@ -1,6 +1,7 @@
 package com.example.furniq.adapters
 
-import android.util.Log
+import android.content.Context
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,11 +10,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.furniq.R
-import com.example.furniq.data.latest_data.Data
+import com.example.furniq.ui.auth.sign_in.Data
+import com.example.furniq.ui.auth.sign_in.Demo
+import com.example.furniq.ui.auth.sign_in.LData
 
-class LatestAdapter(private val listener : OnItemClickListener) : RecyclerView.Adapter<LatestAdapter.MyViewHolder>() {
+class LatestAdapter(private val context: Context, private val listener : OnItemClickListener) : RecyclerView.Adapter<LatestAdapter.MyViewHolder>() {
 
-    var models: List<Data> = listOf()
+    private val prefs: SharedPreferences =
+        context.getSharedPreferences("LikedItemsPrefs", Context.MODE_PRIVATE)
+
+    var models: List<LData> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -21,6 +27,11 @@ class LatestAdapter(private val listener : OnItemClickListener) : RecyclerView.A
 
     private val likedItems = mutableSetOf<Int>()
 
+
+    init {
+        // Load liked items from SharedPreferences
+        likedItems.addAll(prefs.getStringSet("LIKED_ITEMS", emptySet())!!.map { it.toInt() })
+    }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textKategoriya: TextView = itemView.findViewById(R.id.text_kategoriya_latest)
@@ -43,11 +54,8 @@ class LatestAdapter(private val listener : OnItemClickListener) : RecyclerView.A
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val data = models[position]
         holder.apply {
-
             itemView.setOnClickListener {
-
                 listener.onItemClick(models[position])
-
             }
 
             if (likedItems.contains(data.id)) {
@@ -60,10 +68,13 @@ class LatestAdapter(private val listener : OnItemClickListener) : RecyclerView.A
                 if (likedItems.contains(data.id)) {
                     likedItems.remove(data.id)
                     btnSave.setImageResource(R.drawable.heart_svgrepo_com) // Update to "Not Saved" icon
+                    listener.onRemoveFavorite(data)
                 } else {
                     likedItems.add(data.id)
                     btnSave.setImageResource(R.drawable.ic_saved) // Update to "Saved" icon
+                    listener.onAddFavorite(data)
                 }
+                saveLikedItems()
             }
 
             textKategoriya.text = data.name.latin
@@ -81,7 +92,15 @@ class LatestAdapter(private val listener : OnItemClickListener) : RecyclerView.A
 
     override fun getItemCount(): Int = models.size
 
+    private fun saveLikedItems() {
+        // Convert likedItems to Set<String> for SharedPreferences
+        prefs.edit().putStringSet("LIKED_ITEMS", likedItems.map { it.toString() }.toSet()).apply()
+    }
+
     interface OnItemClickListener {
-        fun onItemClick(position: Data)
+        fun onItemClick(position: LData)
+        fun btnSaveClick(position: LData)
+        fun onAddFavorite(position: Demo)
+        fun onRemoveFavorite(position: Demo)
     }
 }

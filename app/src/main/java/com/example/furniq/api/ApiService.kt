@@ -22,6 +22,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
+
     @FormUrlEncoded
     @POST("register")
     suspend fun signUp(@Field("name") name: String, @Field("phone") phone: String, @Field("password") password: String): Response<RegisterTokenData>

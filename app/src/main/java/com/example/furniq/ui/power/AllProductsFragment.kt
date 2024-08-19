@@ -1,21 +1,19 @@
 package com.example.furniq.ui.power
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.furniq.R
 import com.example.furniq.adapters.ItemAdapter
-import com.example.furniq.data.create_favourite.CreateFavouriteData
-import com.example.furniq.data.get_all_products_data.PData
+import com.example.furniq.ui.auth.sign_in.PData
 import com.example.furniq.databinding.FragmentAllProductsBinding
 import com.example.furniq.data.get_all_products_data.ProductsData
 import com.example.furniq.sealedClass.SealedClass
+import com.example.furniq.ui.auth.sign_in.Demo
 import com.example.furniq.ui.power.all_products_clicked.AllProductsClickFragment
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,30 +21,21 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AllProductsFragment : Fragment(R.layout.fragment_all_products), ItemAdapter.OnItemClickListener {
 
-    val adapter = ItemAdapter(  this)
-
-
+    private lateinit var adapter: ItemAdapter
     private lateinit var binding: FragmentAllProductsBinding
     private val vm: PowerVM by viewModel()
-
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentAllProductsBinding.inflate(inflater, container, false)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        vm.getAllProducts()
 
-        // Initialize the adapter
-
-        // Set up RecyclerView
+        adapter = ItemAdapter(requireContext(),this)
         binding.recyclerViewHome.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewHome.adapter = adapter
-
-
-
         viewLifecycleOwner.lifecycleScope.launch {
             vm.powerState.collect { state ->
                 when (state) {
@@ -63,8 +52,6 @@ class AllProductsFragment : Fragment(R.layout.fragment_all_products), ItemAdapte
 
                         if (productsData != null) {
                             adapter.models = productsData.data // Correctly accessing List<PData>
-
-
                         }
                     }
                     is SealedClass.ErrorMessage<*> -> {
@@ -87,8 +74,6 @@ class AllProductsFragment : Fragment(R.layout.fragment_all_products), ItemAdapte
 
             }
         }
-
-
         viewLifecycleOwner.lifecycleScope.launch {
             vm.postState.collect { state ->
                 when (state) {
@@ -143,7 +128,6 @@ class AllProductsFragment : Fragment(R.layout.fragment_all_products), ItemAdapte
         val fragment = AllProductsClickFragment()
         val bundle = Bundle()
         bundle.putInt("productId",position.id)
-        Log.d("QQQ", "onItemClick: ${position.id}")
         fragment.arguments = bundle
 
         requireActivity().supportFragmentManager.beginTransaction()
@@ -151,25 +135,19 @@ class AllProductsFragment : Fragment(R.layout.fragment_all_products), ItemAdapte
             .addToBackStack(null)
             .commit()
 
-       // findNavController().navigate(R.id.action_tabFragment_to_allProductsClickFragment)
     }
 
     override fun btnSaveClick(position: PData) {
-
-
-       // vm.postFavourites(position.id)
-
-
     }
 
-    override fun onAddFavorite(position: PData) {
-        val productId = position.id
-        vm.postFavourites(productId) // Sevimliga qo'shish uchun ViewModelga ma'lumot yuborish
+    override fun onAddFavorite(position: Demo) {
+        val productId = (position as PData).id
+        vm.postFavourites(productId)
     }
 
-    override fun onRemoveFavorite(position: PData) {
-        val productId = position.id
-        vm.deleteFavourites(productId) // Sevimlidan olib tashlash uchun ViewModelga ma'lumot yuborish
+    override fun onRemoveFavorite(position: Demo) {
+        val productId = (position as PData).id
+        vm.deleteFavourites(productId)
     }
 
 

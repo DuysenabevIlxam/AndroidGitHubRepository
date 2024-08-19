@@ -3,8 +3,6 @@ package com.example.furniq.ui.power
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.furniq.data.get_all_products_data.PData
-import com.example.furniq.data.get_all_products_data.ProductsData
 import com.example.furniq.repo.auth_repo.AllProductsRepository
 import com.example.furniq.sealedClass.SealedClass
 import kotlinx.coroutines.Dispatchers

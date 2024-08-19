@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.furniq.R
-import com.example.furniq.data.get_all_products_data.PData
+import com.example.furniq.ui.auth.sign_in.PData
 
 class CategoryByIdAdapter(private val listener : OnItemClickListener): RecyclerView.Adapter<CategoryByIdAdapter.MyViewHolder>() {
 

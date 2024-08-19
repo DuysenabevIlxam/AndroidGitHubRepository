@@ -1,7 +1,7 @@
 package com.example.furniq.adapters
 
-import android.os.Bundle
-import android.util.Log
+import android.content.Context
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +10,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.furniq.R
-import com.example.furniq.data.get_all_products_data.PData
-import com.example.furniq.ui.power.favourites.HeartFragment
+import com.example.furniq.ui.auth.sign_in.Demo
+import com.example.furniq.ui.auth.sign_in.PData
 
-class ItemAdapter(private val listener: OnItemClickListener) :
-    RecyclerView.Adapter<ItemAdapter.MyViewHolder>() {
+class ItemAdapter(
+    private val context: Context, // Context to access SharedPreferences
+    private val listener: OnItemClickListener
+) : RecyclerView.Adapter<ItemAdapter.MyViewHolder>() {
+
+    private val prefs: SharedPreferences =
+        context.getSharedPreferences("LikedItemsPrefs", Context.MODE_PRIVATE)
 
     var models: List<PData> = listOf()
         set(value) {
@@ -23,6 +28,11 @@ class ItemAdapter(private val listener: OnItemClickListener) :
         }
 
     private val likedItems = mutableSetOf<Int>() // Set to track liked item IDs
+
+    init {
+        // Load liked items from SharedPreferences
+        likedItems.addAll(prefs.getStringSet("LIKED_ITEMS", emptySet())!!.map { it.toInt() })
+    }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textKategoriya: TextView = itemView.findViewById(R.id.text_kategoriya)
@@ -42,25 +52,25 @@ class ItemAdapter(private val listener: OnItemClickListener) :
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val data = models[position]
         holder.apply {
-            // Sevimli holatiga ko'ra iconni yangilash
+            // Update icon according to the liked state
             if (likedItems.contains(data.id)) {
                 btnSave.setImageResource(R.drawable.ic_saved) // "Saved" icon
             } else {
                 btnSave.setImageResource(R.drawable.heart_svgrepo_com) // "Not Saved" icon
             }
 
-            // btnSave tugmasi bosilganda hodisa
+            // btnSave button click event
             btnSave.setOnClickListener {
-                // Sevimli holatini tekshirish
                 if (likedItems.contains(data.id)) {
                     likedItems.remove(data.id)
                     btnSave.setImageResource(R.drawable.heart_svgrepo_com) // Not Saved icon
-                    listener.onRemoveFavorite(data) // Sevimlidan olib tashlash uchun ViewModelga yuborish
+                    listener.onRemoveFavorite(data) // Send to ViewModel for removal from favorites
                 } else {
                     likedItems.add(data.id)
                     btnSave.setImageResource(R.drawable.ic_saved) // Saved icon
-                    listener.onAddFavorite(data) // Sevimliga qo'shish uchun ViewModelga yuborish
+                    listener.onAddFavorite(data) // Send to ViewModel for adding to favorites
                 }
+                saveLikedItems() // Save liked items to SharedPreferences
             }
 
             textKategoriya.text = data.name.latin
@@ -75,18 +85,17 @@ class ItemAdapter(private val listener: OnItemClickListener) :
         }
     }
 
-
-
-
     override fun getItemCount(): Int = models.size
+
+    private fun saveLikedItems() {
+        // Convert likedItems to Set<String> for SharedPreferences
+        prefs.edit().putStringSet("LIKED_ITEMS", likedItems.map { it.toString() }.toSet()).apply()
+    }
 
     interface OnItemClickListener {
         fun onItemClick(position: PData)
         fun btnSaveClick(position: PData)
-
-       fun onAddFavorite(position: PData)
-       fun onRemoveFavorite(position: PData)
-
-
+        fun onAddFavorite(position: Demo)
+        fun onRemoveFavorite(position: Demo)
     }
 }
